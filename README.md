@@ -4,10 +4,21 @@ FastMCP server template with all patterns in one clean example.
 
 ## Setup
 
-### 1. Get GitHub Token
+### 1. Get GitHub Token (Minimal Permissions)
+
+**Option A: Fine-grained Token (Recommended)**
+- Go to GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens
+- Generate new token
+- Select only YOUR specific repo(s)
+- Repository permissions: **Contents: Read** (that's all!)
+- Generate & copy token
+
+**Option B: Classic Token**
 - Go to GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
-- Generate new token with `repo` scope
-- Copy the `ghp_xxxx...` token
+- Generate new token
+- Check only: `repo` (or just `repo:status` + `repo_deployment` for read-only)
+- Generate & copy the `ghp_xxxx...` token
+
 
 ### 2. Set Environment Variables
 ```bash

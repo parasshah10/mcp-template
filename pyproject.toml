@@ -4,4 +4,4 @@ version = "0.1.0"
 dependencies = ["fastmcp"]
 
 [project.scripts]
-claire-mcp = "server:app"
+claire-mcp = "server:mcp"

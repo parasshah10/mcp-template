@@ -21,5 +21,11 @@ def process_file(
         "skipped": len(skip_patterns) if skip_patterns else 0
     }
 
-if __name__ == "__main__":
+def main():
+    """Main entry point for the MCP server."""
+    # Run the FastMCP server
     mcp.run()
+
+
+if __name__ == "__main__":
+    main()

@@ -21,4 +21,5 @@ def process_file(
         "skipped": len(skip_patterns) if skip_patterns else 0
     }
 
-app = mcp.asgi_app()
+if __name__ == "__main__":
+    mcp.run()

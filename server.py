@@ -1,10 +1,24 @@
 from fastmcp import FastMCP
+from typing import Dict, Any, List, Optional, Annotated
+from pydantic import Field
 
-mcp = FastMCP("test")
+mcp = FastMCP("claire-mcp")
 
 @mcp.tool
-def test() -> str:
-    """Test tool"""
-    return "works"
+def process_file(
+    path: str,
+    output_format: str = "json",
+    max_lines: int = 1000,
+    skip_patterns: Optional[List[str]] = None,
+    include_metadata: bool = False,
+    url: Annotated[str, Field(description="Full direct URL to file, used over path if provided")] = None
+) -> Dict[str, Any]:
+    """Process local or remote file with various output options"""
+    return {
+        "file": path,
+        "lines_processed": 850,
+        "format": output_format,
+        "skipped": len(skip_patterns) if skip_patterns else 0
+    }
 
-app = mcp.get_app()
+app = mcp.asgi_app()

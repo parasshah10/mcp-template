@@ -15,10 +15,8 @@ FastMCP server template with all patterns in one clean example.
 
 **Option B: Classic Token**
 - Go to GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
-- Generate new token
-- Check only: `repo` (or just `repo:status` + `repo_deployment` for read-only)
-- Generate & copy the `ghp_xxxx...` token
-
+- Generate new token with `repo` scope
+- Copy the `ghp_xxxx...` token
 
 ### 2. Set Environment Variables
 ```bash
@@ -28,8 +26,7 @@ export GITHUB_REPO="yourusername/your-repo"
 
 ### 3. Configure Claude Desktop
 
-Add to Claude Desktop config:
-
+**For Private Repos:**
 ```json
 {
   "mcpServers": {
@@ -38,6 +35,22 @@ Add to Claude Desktop config:
       "args": [
         "--from",
         "git+https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git",
+        "claire-mcp"
+      ]
+    }
+  }
+}
+```
+
+**For Public Repos:**
+```json
+{
+  "mcpServers": {
+    "claire-tools": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/yourusername/your-repo.git",
         "claire-mcp"
       ]
     }
@@ -58,3 +71,26 @@ The `process_file` example shows all FastMCP patterns:
 - Dict return type for structured data
 
 Just replace with your own tools following the same patterns!
+
+## Testing
+
+```bash
+# Clone and test locally
+git clone https://github.com/yourusername/your-repo.git
+cd your-repo
+
+# Install FastMCP
+pip install fastmcp
+
+# Test the server
+python server.py
+```
+
+## Troubleshooting
+
+If you get import errors, test with uvx directly:
+```bash
+uvx --from git+https://github.com/yourusername/your-repo.git claire-mcp --help
+```
+
+This will show the actual Python error if there's an issue.
